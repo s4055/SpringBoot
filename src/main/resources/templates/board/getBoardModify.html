@@ -1,0 +1,193 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+<title>강의 평가 상세 수정</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+
+<body>
+	<!-- navbar -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/board/getBoardList">Home</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/system/logout}">로그아웃</a></li>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/board/insertBoard}">게시글 등록</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<br>
+
+	<div class="container">
+		<div class="card">
+			<h5 class="card-header">강의 평가 상세 수정</h5>
+			<form th:action="@{/board/updateBoard}" method="post" id="member">
+				<div class="card-body">
+					<!-- 추천 댓글 사용되는 변수 -->
+					<input name="seq" type="hidden" th:value="${board.seq}" id="seq">
+
+					<!-- 강의명	교수명	평가 -->
+					<div class="row">
+						<div class="col-4">
+							<div class="input-group mb-3">
+								<span class="input-group-text" id="inputGroup-sizing-default">강의명</span>
+								<input name="lectureName" type="text"
+									th:value="${board.lectureName}" class="form-control"
+									aria-label="Sizing example input"
+									aria-describedby="inputGroup-sizing-default">
+							</div>
+						</div>
+						<div class="col-4">
+							<div class="input-group mb-3">
+								<span class="input-group-text" id="inputGroup-sizing-default">교수명</span>
+								<input name="professorName" type="text"
+									th:value="${board.professorName}" class="form-control"
+									aria-label="Sizing example input"
+									aria-describedby="inputGroup-sizing-default">
+							</div>
+						</div>
+						<div class="col-4">
+							<div class="input-group mb-3">
+								<span class="input-group-text" id="inputGroup-sizing-default">평가</span>
+								<input name="score" type="text" th:value="${board.score}"
+									class="form-control" aria-label="Sizing example input"
+									aria-describedby="inputGroup-sizing-default">
+							</div>
+						</div>
+					</div>
+
+					<!-- 수강연도	수강학기	강의구분	추천 -->
+					<div class="row">
+						<div class="col-4">
+							<div class="row">
+								<div class="col-6">
+									<div class="input-group mb-3">
+										<span class="input-group-text" id="inputGroup-sizing-default">수강연도</span>
+										<select class="form-select" name="lectureYear"
+											th:with="current=${#calendars.year(#calendars.createNow())}">
+											<option
+												th:each="year : ${#numbers.sequence(current-5, current-1)}"
+												th:value="${year}" th:text="${year}"></option>
+											<option th:value="${current}" th:text="${current}" selected></option>
+											<option
+												th:each="year : ${#numbers.sequence(current+1, current+5)}"
+												th:value="${year}" th:text="${year}"></option>
+										</select>
+									</div>
+								</div>
+								<div class="col-6">
+									<div class="input-group mb-3">
+										<span class="input-group-text" id="inputGroup-sizing-default">수강학기</span>
+										<select class="form-select" name="semesterDivide">
+											<option value="1학기" selected>1학기</option>
+											<option value="하계">하계</option>
+											<option value="2학기">2학기</option>
+											<option value="동계">동계</option>
+										</select>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="col-4">
+							<div class="input-group mb-3">
+								<span class="input-group-text" id="inputGroup-sizing-default">강의구분</span>
+								<select class="form-select" name="lectureDivide">
+									<option value="전공 필수" selected>전공 필수</option>
+									<option value="전공 선택">전공 선택</option>
+									<option value="교양 필수">교양 필수</option>
+									<option value="교양 선택">교양 선택</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-4">
+							<div class="input-group mb-3">
+								<span class="input-group-text" id="inputGroup-sizing-default">추천</span>
+								<span th:text="${board.likeCnt}" class="form-control"
+									aria-label="Sizing example input"
+									aria-describedby="inputGroup-sizing-default"></span>
+							</div>
+						</div>
+					</div>
+
+					<!-- 작성자	등록일	조회수 -->
+					<div class="row">
+						<div class="col-4">
+							<div class="input-group mb-3">
+								<span class="input-group-text" id="inputGroup-sizing-default">작성자</span>
+								<span th:text="${board.member.name}" class="form-control"
+									aria-label="Sizing example input"
+									aria-describedby="inputGroup-sizing-default"></span>
+							</div>
+						</div>
+						<div class="col-4">
+							<div class="input-group mb-3">
+								<span class="input-group-text" id="inputGroup-sizing-default">등록일</span>
+								<span th:text="${#dates.format(board.createDate, 'yyyy-MM-dd')}"
+									class="form-control" aria-label="Sizing example input"
+									aria-describedby="inputGroup-sizing-default"></span>
+							</div>
+						</div>
+						<div class="col-4">
+							<div class="input-group mb-3">
+								<span class="input-group-text" id="inputGroup-sizing-default">조회수</span>
+								<span th:text="${board.cnt}" class="form-control"
+									aria-label="Sizing example input"
+									aria-describedby="inputGroup-sizing-default"></span>
+							</div>
+						</div>
+					</div>
+
+					<!-- 제목 -->
+					<div class="row">
+						<div class="input-group mb-3">
+							<span class="input-group-text" id="inputGroup-sizing-default">제목</span>
+							<input name="title" type="text" th:value="${board.title}"
+								class="form-control" aria-label="Sizing example input"
+								aria-describedby="inputGroup-sizing-default">
+						</div>
+					</div>
+
+					<!-- 내용 -->
+					<div class="row">
+						<div class="input-group mb-3">
+							<span class="input-group-text" id="inputGroup-sizing-default">내용</span>
+							<textarea name="content" th:text="${board.content}"
+								class="form-control" aria-label="Sizing example input"
+								aria-describedby="inputGroup-sizing-default"></textarea>
+						</div>
+					</div>
+
+					<!-- 등록 수정 삭제 추천 -->
+					<div class="d-flex justify-content-end">
+						<button type="submit" class="btn btn-primary m-2">수정 완료</button>
+						<a th:href="@{/board/deleteBoard(seq=${board.seq})}">
+							<button type="button" class="btn btn-danger m-2">삭제</button>
+						</a>
+						<button id="increase" type="button" class="btn btn-info m-2 disabled">추천</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

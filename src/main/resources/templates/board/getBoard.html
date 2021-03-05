@@ -1,0 +1,217 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+<title>강의 평가 상세</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+
+<body>
+	<!-- navbar -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/board/getBoardList">Home</a>
+
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/system/logout}">로그아웃</a></li>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/board/insertBoard}">게시글 등록</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<br>
+
+	<div class="container">
+		<div class="card">
+			<h5 class="card-header">강의 평가 상세</h5>
+			<div class="card-body">
+				<!-- 추천 댓글 사용되는 변수 -->
+				<input name="seq" type="hidden" th:value="${board.seq}" id="seq">
+				<input name="lectureName" type="hidden" th:value="${board.lectureName}" id="lectureName">
+				<input name="professorName" type="hidden" th:value="${board.professorName}" id="professorName">
+				<input name="score" type="hidden" th:value="${board.score}" id="score">
+				<input name="lectureYear" type="hidden" th:value="${board.lectureYear}" id="lectureYear">
+				<input name="semesterDivide" type="hidden" th:value="${board.semesterDivide}" id="semesterDivide">
+				<input name="lectureDivide" type="hidden" th:value="${board.lectureDivide}" id="lectureDivide">
+				<input name="likeCnt" type="hidden" th:value="${board.likeCnt}" id="likeCnt">
+				<input name="cnt" type="hidden" th:value="${board.cnt}" id="cnt">
+				<input name="title" type="hidden" th:value="${board.title}" id="title">
+				<input name="content" type="hidden" th:value="${board.content}" id="content">
+				<input name="member" type="hidden" th:value="${board.member}" id="member">
+
+				<!-- 강의명	교수명	평가 -->
+				<div class="row">
+					<div class="col-4">
+						<div class="input-group mb-3">
+							<span class="input-group-text" id="inputGroup-sizing-default">강의명</span>
+							<span th:text="${board.lectureName}" class="form-control"
+								aria-label="Sizing example input"
+								aria-describedby="inputGroup-sizing-default"></span>
+						</div>
+					</div>
+					<div class="col-4">
+						<div class="input-group mb-3">
+							<span class="input-group-text" id="inputGroup-sizing-default">교수명</span>
+							<span th:text="${board.professorName}" class="form-control"
+								aria-label="Sizing example input"
+								aria-describedby="inputGroup-sizing-default"></span>
+						</div>
+					</div>
+					<div class="col-4">
+						<div class="input-group mb-3">
+							<span class="input-group-text" id="inputGroup-sizing-default">평가</span>
+							<span th:text="${board.score}" class="form-control"
+								aria-label="Sizing example input"
+								aria-describedby="inputGroup-sizing-default"></span>
+						</div>
+					</div>
+				</div>
+
+				<!-- 수강연도	수강학기	강의구분	추천 -->
+				<div class="row">
+					<div class="col-4">
+					<div class="row">
+						<div class="col-6">
+							<div class="input-group mb-3">
+								<span class="input-group-text" id="inputGroup-sizing-default">수강연도</span>
+								<span th:text="${board.lectureYear}" class="form-control"
+									aria-label="Sizing example input"
+									aria-describedby="inputGroup-sizing-default"></span>
+							</div>
+						</div>
+						<div class="col-6">
+							<div class="input-group mb-3">
+								<span class="input-group-text" id="inputGroup-sizing-default">수강학기</span>
+								<span th:text="${board.semesterDivide}" class="form-control"
+									aria-label="Sizing example input"
+									aria-describedby="inputGroup-sizing-default"></span>
+							</div>
+						</div>
+						</div>
+					</div>
+					<div class="col-4">
+						<div class="input-group mb-3">
+							<span class="input-group-text" id="inputGroup-sizing-default">강의구분</span>
+							<span th:text="${board.lectureDivide}" class="form-control"
+								aria-label="Sizing example input"
+								aria-describedby="inputGroup-sizing-default"></span>
+						</div>
+					</div>
+					<div class="col-4">
+						<div class="input-group mb-3">
+							<span class="input-group-text" id="inputGroup-sizing-default">추천</span>
+							<span th:text="${board.likeCnt}" class="form-control"
+								aria-label="Sizing example input"
+								aria-describedby="inputGroup-sizing-default"></span>
+						</div>
+					</div>
+				</div>
+
+				<!-- 작성자	등록일	조회수 -->
+				<div class="row">
+					<div class="col-4">
+						<div class="input-group mb-3">
+							<span class="input-group-text" id="inputGroup-sizing-default">작성자</span>
+							<span th:text="${board.member.name}" class="form-control"
+								aria-label="Sizing example input"
+								aria-describedby="inputGroup-sizing-default"></span>
+						</div>
+					</div>
+					<div class="col-4">
+						<div class="input-group mb-3">
+							<span class="input-group-text" id="inputGroup-sizing-default">등록일</span>
+							<span th:text="${#dates.format(board.createDate, 'yyyy-MM-dd')}"
+								class="form-control" aria-label="Sizing example input"
+								aria-describedby="inputGroup-sizing-default"></span>
+						</div>
+					</div>
+					<div class="col-4">
+						<div class="input-group mb-3">
+							<span class="input-group-text" id="inputGroup-sizing-default">조회수</span>
+							<span th:text="${board.cnt}" class="form-control"
+								aria-label="Sizing example input"
+								aria-describedby="inputGroup-sizing-default"></span>
+						</div>
+					</div>
+				</div>
+
+				<!-- 제목 -->
+				<div class="row">
+					<div class="input-group mb-3">
+						<span class="input-group-text" id="inputGroup-sizing-default">제목</span>
+						<span th:text="${board.title}" class="form-control"
+							aria-label="Sizing example input"
+							aria-describedby="inputGroup-sizing-default"></span>
+					</div>
+				</div>
+
+				<!-- 내용 -->
+				<div class="row">
+					<div class="input-group mb-3">
+						<span class="input-group-text" id="inputGroup-sizing-default">내용</span>
+						<span th:text="${board.content}" class="form-control"
+							aria-label="Sizing example input"
+							aria-describedby="inputGroup-sizing-default"></span>
+					</div>
+				</div>
+
+				<!-- 등록 수정 삭제 추천 -->
+				<div class="d-flex justify-content-end"> 
+					<a th:href="@{/board/getBoardModify(seq=${board.seq})}">
+						<button type="button" class="btn btn-primary m-2">수정</button>
+					</a>	
+					<button type="button" class="btn btn-danger m-2 disabled">삭제</button>
+					<button id="increase" type="button" class="btn btn-info m-2">추천</button>
+				</div>
+			</div>
+		</div>
+		<br>
+
+		<!-- 댓글 -->
+		<div class="card">
+				<div class="card-body">
+					<textarea id="comment-content" class="form-control" rows="1"
+						name="Ccontent"></textarea>
+				</div>
+				<div class="card-footer d-flex justify-content-end">
+					<button type="button" id="btn-comment-save" class="btn btn-primary">댓글등록</button>
+				</div>
+		</div>
+		<br>
+		<div class="card">
+			<div class="card-header">댓글 리스트</div>
+			<ul id="comment--box" class="list-group">
+				<li id="comment--1" class="list-group-item d-flex justify-content-between" th:each="comment : ${commentList}">
+					<div th:text="${comment.Ccontent}"></div>
+					<div>
+						<div class="font-italic" th:text="'작성자 : ' + ${comment.writer}"></div>
+						<div class="d-flex justify-content-end m-1">
+							<input type="hidden" th:value="${comment.Cseq}" id="Cseq">
+							<button class="badge bg-secondary" id="btn-comment-remove">삭제</button>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<br>
+	</div>
+	<script src="/js/board.js"></script>
+</body>
+</html>
