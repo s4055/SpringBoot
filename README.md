@@ -3,6 +3,8 @@
 
 ## 화면 구성
 * 메인화면(로그인 화면)
+![K-001](https://user-images.githubusercontent.com/64817851/110793078-91b33900-82b7-11eb-905c-e2f05cd59a0b.png)</br>
+
 * 게시글 목록 화면
 * 게시글 화면
 * 게시글 수정 화면
