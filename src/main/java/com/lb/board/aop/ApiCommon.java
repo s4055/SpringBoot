@@ -38,21 +38,5 @@ public class ApiCommon {
 
             log.info("수행 시간 =========> {}", stopWatch.getTotalTimeMillis());
         }
-
-
-
-//        String method = joinPoint.getSignature().getName();
-//
-//        StopWatch stopWatch = new StopWatch();
-//        stopWatch.start();
-//
-//        Object obj = joinPoint.proceed();
-//
-//        stopWatch.stop();
-//
-//        log.info("요청 데이터 =========> " + joinPoint.getSignature().getName() + " " + Arrays.toString(joinPoint.getArgs()));
-//        log.info("수행 시간 =========> " + stopWatch.getTotalTimeMillis());
-//
-//        return obj;
     }
 }
