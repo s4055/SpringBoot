@@ -50,11 +50,11 @@ public class BoardController {
 			endPage = 5;
 		}
 
-		System.out.println("boardList.getPageable().getPageNumber() : " + boardList.getPageable().getPageNumber());
-		System.out.println("boardList.getTotalPages() : " + boardList.getTotalPages());
-		System.out.println("boardList.getTotalElements() : " + boardList.getTotalElements());
-		System.out.println("startPage : " + startPage);
-		System.out.println("endPage : " + endPage);
+//		System.out.println("boardList.getPageable().getPageNumber() : " + boardList.getPageable().getPageNumber());
+//		System.out.println("boardList.getTotalPages() : " + boardList.getTotalPages());
+//		System.out.println("boardList.getTotalElements() : " + boardList.getTotalElements());
+//		System.out.println("startPage : " + startPage);
+//		System.out.println("endPage : " + endPage);
 
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
